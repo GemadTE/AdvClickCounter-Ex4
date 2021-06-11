@@ -14,11 +14,11 @@ public interface ClickListContract {
   }
 
   interface Presenter {
-    void onClickListCell(ClickData data);
-
     //cuando se pulsa item
 
     //void globalValueAdd();
+
+    void onClickItem(ClickData data);
 
     void injectView(WeakReference<View> view);
     void injectModel(Model model);
@@ -37,12 +37,12 @@ public interface ClickListContract {
     String getStoredData();
     void onRestartScreen(String data);
     void onDataFromPreviousScreen(String data);
-
-    void newClick(int numeroVista);
-    long getId();
-    int getNumber();
-    List<ClickData> getNumberDataList();
-    List<ClickData> addNewClick(List<ClickData> datasource);
+    void onClickButtonPressed(String data);
+    void globalValueAdd();
+    void incrementClickCount(ClickData data);
+    int getCounterData();
+    int getClick();
+    List<ClickData> getClickDataList();
   }
 
 }

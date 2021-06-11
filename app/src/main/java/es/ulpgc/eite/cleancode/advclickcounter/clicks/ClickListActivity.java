@@ -3,6 +3,7 @@ package es.ulpgc.eite.cleancode.advclickcounter.clicks;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,11 +11,13 @@ import es.ulpgc.eite.cleancode.advclickcounter.R;
 import es.ulpgc.eite.cleancode.advclickcounter.data.ClickData;
 
 public class ClickListActivity
-    extends AppCompatActivity implements ClickListContract.View {
+        extends AppCompatActivity implements ClickListContract.View {
 
   public static String TAG = ClickListActivity.class.getSimpleName();
 
   private ClickListContract.Presenter presenter;
+
+  private TextView value;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +34,10 @@ public class ClickListActivity
     } else {
       presenter.onRestart();
     }
+  }
+
+  public void onClickButtonPressed(View view) {
+    presenter.onClickButtonPressed();
   }
 
   @Override
@@ -68,24 +75,19 @@ public class ClickListActivity
 
     // deal with the datasource
     ((ListView) findViewById(R.id.clickList)).setAdapter(new ClickListAdapter(
-            this, viewModel.datasource, new View.OnClickListener() {
+                    this, viewModel.datasource, new View.OnClickListener() {
 
-          @Override
-          public void onClick(View view) {
-            ClickData data = (ClickData) view.getTag();
-            presenter.onClickListCell(data);
-
-          }
-        })
+              @Override
+              public void onClick(View view) {
+                ClickData data = (ClickData) view.getTag();
+                presenter.onClickItem(data);
+              }
+            })
     );
   }
 
   @Override
   public void injectPresenter(ClickListContract.Presenter presenter) {
     this.presenter = presenter;
-  }
-
-  public void onClickButtonPressed(View view) {
-    presenter.onClickButtonPressed();
   }
 }

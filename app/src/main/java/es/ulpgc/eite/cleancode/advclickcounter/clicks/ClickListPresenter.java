@@ -1,7 +1,6 @@
 package es.ulpgc.eite.cleancode.advclickcounter.clicks;
 
 import java.lang.ref.WeakReference;
-import java.util.List;
 
 import es.ulpgc.eite.cleancode.advclickcounter.app.AppMediator;
 import es.ulpgc.eite.cleancode.advclickcounter.app.ClickToCounterState;
@@ -16,7 +15,6 @@ public class ClickListPresenter implements ClickListContract.Presenter {
   private ClickListState state;
   private ClickListContract.Model model;
   private AppMediator mediator;
-  private int clicks=0;
 
   public ClickListPresenter(AppMediator mediator) {
     this.mediator = mediator;
@@ -53,15 +51,6 @@ public class ClickListPresenter implements ClickListContract.Presenter {
   public void onResume() {
     // Log.e(TAG, "onResume()");
 
-    /*
-    // use passed state if is necessary
-    ClickListState savedState = router.getStateFromNextScreen();
-    if (savedState != null) {
-
-      // update the model if is necessary
-      model.onDataFromNextScreen(savedState.data);
-    }
-    */
 
     // call the model and update the state
     state.data = model.getStoredData();
@@ -74,6 +63,8 @@ public class ClickListPresenter implements ClickListContract.Presenter {
   @Override
   public void onBackPressed() {
     // Log.e(TAG, "onBackPressed()");
+    ClickToCounterState clickToCounterState = new ClickToCounterState();
+    passStateToPreviousScreen(clickToCounterState);
   }
 
   @Override
@@ -88,25 +79,27 @@ public class ClickListPresenter implements ClickListContract.Presenter {
 
   @Override
   public void onClickButtonPressed() {
-    List<ClickData> nuevoClick = model.addNewClick(state.datasource);
-    state.datasource = nuevoClick;
+
+    model.onClickButtonPressed(state.data);
+
+    state.datasource = model.getClickDataList();
+    state.data = String.valueOf(model.getCounterData());
+
     view.get().onDataUpdated(state);
+
   }
 
   @Override
-  public void onClickListCell(ClickData data) {
-    state.counterData.value++;
-    data.value++;
+  public void onClickItem(ClickData data) {
+    model.incrementClickCount(data);
+    data.value = model.getClick();
+
+    model.globalValueAdd();
+    state.counterData.value = model.getCounterData();
+
     view.get().onDataUpdated(state);
   }
-/*
-  @Override
-  public void globalValueAdd() {
-    state.counterData.value++;
-    Log.d(TAG, String.valueOf(state.counterData));
-  }
 
- */
 
   private void passStateToPreviousScreen(ClickToCounterState state) {
     mediator.setPreviousClickScreenState(state);
@@ -115,6 +108,9 @@ public class ClickListPresenter implements ClickListContract.Presenter {
   private CounterToClickState getStateFromPreviousScreen() {
     return mediator.getPreviousClickScreenState();
   }
+
+
+
 
   @Override
   public void injectView(WeakReference<ClickListContract.View> view) {

@@ -111,16 +111,6 @@ public class CounterListPresenter implements CounterListContract.Presenter {
     return mediator.getNextCounterScreenState();
   }
 
-  /*
-  private void passStateToPreviousScreen(CounterListState state) {
-    mediator.setPreviousCounterScreenState(state);
-  }
-
-  private CounterListState getStateFromPreviousScreen() {
-    return mediator.getPreviousCounterScreenState();
-  }
-  */
-
   @Override
   public void injectView(WeakReference<CounterListContract.View> view) {
     this.view = view;
