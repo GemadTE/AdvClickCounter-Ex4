@@ -16,7 +16,6 @@ public class CounterListActivity
     extends AppCompatActivity implements CounterListContract.View {
 
   public static String TAG = CounterListActivity.class.getSimpleName();
-
   private CounterListContract.Presenter presenter;
 
   @Override
