@@ -79,27 +79,20 @@ public class ClickListPresenter implements ClickListContract.Presenter {
 
   @Override
   public void onClickButtonPressed() {
-
     model.onClickButtonPressed(state.data);
-
     state.datasource = model.getClickDataList();
     state.data = String.valueOf(model.getCounterData());
-
     view.get().onDataUpdated(state);
-
   }
 
   @Override
   public void onClickItem(ClickData data) {
     model.incrementClickCount(data);
     data.value = model.getClick();
-
     model.globalValueAdd();
     state.counterData.value = model.getCounterData();
-
     view.get().onDataUpdated(state);
   }
-
 
   private void passStateToPreviousScreen(ClickToCounterState state) {
     mediator.setPreviousClickScreenState(state);
@@ -108,9 +101,6 @@ public class ClickListPresenter implements ClickListContract.Presenter {
   private CounterToClickState getStateFromPreviousScreen() {
     return mediator.getPreviousClickScreenState();
   }
-
-
-
 
   @Override
   public void injectView(WeakReference<ClickListContract.View> view) {
