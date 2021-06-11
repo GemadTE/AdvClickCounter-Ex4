@@ -43,6 +43,8 @@ public interface CounterListContract {
     int getNumber();
 
     List<CounterData> getNumberDataList();
+
+      List<CounterData> addNewCounter(List<CounterData> datasource);
   }
 
 }

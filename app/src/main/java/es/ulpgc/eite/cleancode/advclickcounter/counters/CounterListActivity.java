@@ -22,7 +22,7 @@ public class CounterListActivity
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_counter);
-    getSupportActionBar().setTitle(R.string.app_name);
+    getSupportActionBar().setTitle(R.string.counter_title);
 
     // don't touch, necessary for tests
     if (savedInstanceState == null) {

@@ -40,7 +40,7 @@ public class CounterListModel implements CounterListContract.Model {
   public void newCounter(int numeroVista) {
     CounterData numero = new CounterData();
 
-    numeroVista++;
+    //numeroVista++;
 
     numero.value= numeroVista;
 
@@ -71,4 +71,9 @@ public class CounterListModel implements CounterListContract.Model {
     return counterDataList;
   }
 
+  @Override
+  public List<CounterData> addNewCounter(List<CounterData> datasource) {
+    datasource.add(new CounterData());
+    return datasource;
+  }
 }
