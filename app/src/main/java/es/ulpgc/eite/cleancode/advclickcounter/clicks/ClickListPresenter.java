@@ -1,10 +1,12 @@
 package es.ulpgc.eite.cleancode.advclickcounter.clicks;
 
 import java.lang.ref.WeakReference;
+import java.util.List;
 
 import es.ulpgc.eite.cleancode.advclickcounter.app.AppMediator;
 import es.ulpgc.eite.cleancode.advclickcounter.app.ClickToCounterState;
 import es.ulpgc.eite.cleancode.advclickcounter.app.CounterToClickState;
+import es.ulpgc.eite.cleancode.advclickcounter.data.ClickData;
 
 public class ClickListPresenter implements ClickListContract.Presenter {
 
@@ -85,8 +87,20 @@ public class ClickListPresenter implements ClickListContract.Presenter {
 
   @Override
   public void onClickButtonPressed() {
+    List<ClickData> nuevoClick = model.addNewClick(state.datasource);
+    state.datasource = nuevoClick;
+    view.get().onDataUpdated(state);
+  }
+/*
+  @Override
+  public void onClickListCell(ClickData data) {
+    ClickToCounterState state = new ClickToCounterState();
+    state.data = this.state.data;
+    passStateToPreviousScreen(state);
 
   }
+
+ */
 
   private void passStateToPreviousScreen(ClickToCounterState state) {
     mediator.setPreviousClickScreenState(state);

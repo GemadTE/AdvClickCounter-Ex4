@@ -35,7 +35,7 @@ public class CounterListModel implements CounterListContract.Model {
   public void onDataFromNextScreen(String data) {
     // Log.e(TAG, "onDataFromNextScreen()");
   }
-
+/*
   @Override
   public void newCounter(int numeroVista) {
     CounterData numero = new CounterData();
@@ -47,6 +47,8 @@ public class CounterListModel implements CounterListContract.Model {
     counterDataList.add(numero);
     setNumber(numero.value);
   }
+
+ */
 
   @Override
   public long getId() {

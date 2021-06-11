@@ -36,7 +36,7 @@ public interface CounterListContract {
     void onDataFromNextScreen(String data);
     void onRestartScreen(String data);
 
-    void newCounter(int numeroVista);
+    //void newCounter(int numeroVista);
 
     long getId();
 
