@@ -1,6 +1,9 @@
 package es.ulpgc.eite.cleancode.advclickcounter.counters;
 
 import java.lang.ref.WeakReference;
+import java.util.List;
+
+import es.ulpgc.eite.cleancode.advclickcounter.data.CounterData;
 
 public interface CounterListContract {
 
@@ -13,6 +16,8 @@ public interface CounterListContract {
   }
 
   interface Presenter {
+    void onCounterListCell(CounterData data);
+
     void injectView(WeakReference<View> view);
     void injectModel(Model model);
 
@@ -30,7 +35,14 @@ public interface CounterListContract {
 
     void onDataFromNextScreen(String data);
     void onRestartScreen(String data);
-    void onDataFromPreviousScreen(String data);
+
+    void newCounter(int numeroVista);
+
+    long getId();
+
+    int getNumber();
+
+    List<CounterData> getNumberDataList();
   }
 
 }

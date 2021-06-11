@@ -9,5 +9,6 @@ public class CounterListViewModel {
 
   // put the view state here
   public String data;
+  public int number = 0;
   public List<CounterData> datasource = new ArrayList<>();
 }
