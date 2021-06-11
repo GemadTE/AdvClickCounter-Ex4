@@ -16,6 +16,7 @@ public class ClickListPresenter implements ClickListContract.Presenter {
   private ClickListState state;
   private ClickListContract.Model model;
   private AppMediator mediator;
+  private int clicks=0;
 
   public ClickListPresenter(AppMediator mediator) {
     this.mediator = mediator;
@@ -91,13 +92,18 @@ public class ClickListPresenter implements ClickListContract.Presenter {
     state.datasource = nuevoClick;
     view.get().onDataUpdated(state);
   }
-/*
+
   @Override
   public void onClickListCell(ClickData data) {
-    ClickToCounterState state = new ClickToCounterState();
-    state.data = this.state.data;
-    passStateToPreviousScreen(state);
-
+    state.counterData.value++;
+    data.value++;
+    view.get().onDataUpdated(state);
+  }
+/*
+  @Override
+  public void globalValueAdd() {
+    state.counterData.value++;
+    Log.d(TAG, String.valueOf(state.counterData));
   }
 
  */

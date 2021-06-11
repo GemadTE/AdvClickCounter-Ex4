@@ -14,6 +14,12 @@ public interface ClickListContract {
   }
 
   interface Presenter {
+    void onClickListCell(ClickData data);
+
+    //cuando se pulsa item
+
+    //void globalValueAdd();
+
     void injectView(WeakReference<View> view);
     void injectModel(Model model);
 
